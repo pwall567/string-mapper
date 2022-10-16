@@ -49,9 +49,9 @@ object URIStringMapper {
     /**
      * Decode string from URI percent-encoding.
      */
-    fun String.decodeURI() = mapSubstring { s, i ->
-        if (s[i] != '%') null else StringMapper.buildResult(s, i, 3) {
-            (s[i + 1].fromHexDigit() shl 4) or s[i + 2].fromHexDigit()
+    fun String.decodeURI() = mapSubstring {
+        if (this[it] != '%') null else StringMapper.buildResult(this, it, 3) {
+            (this[it + 1].fromHexDigit() shl 4) or this[it + 2].fromHexDigit()
         }
     }
 

@@ -29,6 +29,7 @@ import kotlin.test.Test
 import kotlin.test.assertFailsWith
 import kotlin.test.assertSame
 import kotlin.test.expect
+
 import net.pwall.text.StringMapper.checkLength
 import net.pwall.text.StringMapper.mapCharacters
 import net.pwall.text.StringMapper.mapSubstring
@@ -44,10 +45,10 @@ class StringMapperTest {
 
     @Test fun `should map substrings correctly`() {
         val unchanged = "unchanged"
-        assertSame(unchanged, unchanged.mapSubstring { _, _ -> null })
-        expect("caged") { unchanged.mapSubstring { s, i -> if (s[i] in "hnu") ElisionMapResult(1) else null } }
-        expect("unchecked") { unchanged.mapSubstring { s, i ->
-            if (s.regionMatches(i, "ang", 0, 3))
+        assertSame(unchanged, unchanged.mapSubstring { null })
+        expect("caged") { unchanged.mapSubstring { if (unchanged[it] in "hnu") ElisionMapResult(1) else null } }
+        expect("unchecked") { unchanged.mapSubstring {
+            if (unchanged.regionMatches(it, "ang", 0, 3))
                 StringMapResult(3, "eck")
             else
                 null

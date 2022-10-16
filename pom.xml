@@ -5,7 +5,7 @@
 
   <groupId>net.pwall.text</groupId>
   <artifactId>string-mapper</artifactId>
-  <version>1.0</version>
+  <version>1.1</version>
   <name>String mapping utilities</name>
   <description>String mapping utilities for escaping and unescaping character sequences</description>
   <packaging>jar</packaging>

@@ -60,21 +60,21 @@ object UTF8StringMapper {
     /**
      * Decode string from UTF-8.
      */
-    fun String.fromUTF8() = mapSubstring { s, i ->
-        val first = s[i].code
+    fun String.fromUTF8() = mapSubstring {
+        val first = this[it].code
         if (first <= 0x7F)
             null
         else if (first <= 0xDF) {
-            StringMapper.buildResult(s, i, 2, "UTF-8") {
-                val second = s[i + 1].code
+            StringMapper.buildResult(this, it, 2, "UTF-8") {
+                val second = this[it + 1].code
                 require((second and 0xC0) == 0x80) { "Invalid UTF-8 sequence" }
                 ((first and 0x1F) shl 6) or (second and 0x3F)
             }
         }
         else {
-            StringMapper.buildResult(s, i, 3, "UTF-8") {
-                val second = s[i + 1].code
-                val third = s[i + 2].code
+            StringMapper.buildResult(this, it, 3, "UTF-8") {
+                val second = this[it + 1].code
+                val third = this[it + 2].code
                 require((second and 0xC0) == 0x80 && (third and 0xC0) == 0x80) { "Invalid UTF-8 sequence" }
                 ((first and 0xF) shl 12) or ((second and 0x3F) shl 6) or (third and 0x3F)
             }

@@ -63,16 +63,16 @@ object StringMapper {
      * parameters, the original string and the current index, and returns a `MapResult` object which contains the
      * replacement details and the number of characters from the original string to be skipped.
      */
-    fun String.mapSubstring(mapFunction: (String, Int) -> MapResult?): String {
+    fun String.mapSubstring(mapFunction: (Int) -> MapResult?): String {
         val len = length
         for (i in 0 until len) {
-            mapFunction(this, i)?.let {
+            mapFunction(i)?.let {
                 return buildString {
                     append(this@mapSubstring, 0, i)
                     it.appendResult(this)
                     var j = i + it.length
                     while (j < len) {
-                        mapFunction(this@mapSubstring, j)?.let {
+                        mapFunction(j)?.let {
                             it.appendResult(this)
                             j += it.length
                         } ?: append(this@mapSubstring[j++])

@@ -31,8 +31,8 @@ import kotlin.test.assertFalse
 import kotlin.test.assertSame
 import kotlin.test.assertTrue
 import kotlin.test.expect
-import net.pwall.text.URIStringMapper.decodeURI
 
+import net.pwall.text.URIStringMapper.decodeURI
 import net.pwall.text.URIStringMapper.encodeURI
 import net.pwall.text.URIStringMapper.fromHexDigit
 import net.pwall.text.URIStringMapper.isUnreservedForURI

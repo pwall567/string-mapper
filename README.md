@@ -27,23 +27,23 @@ More documentation to follow; in the meantime examples of the use of the functio
 
 ## Dependency Specification
 
-The latest version of the library is 1.0, and it may be obtained from the Maven Central repository.
+The latest version of the library is 1.1, and it may be obtained from the Maven Central repository.
 
 ### Maven
 ```xml
     <dependency>
       <groupId>net.pwall.text</groupId>
       <artifactId>string-mapper</artifactId>
-      <version>1.0</version>
+      <version>1.1</version>
     </dependency>
 ```
 ### Gradle
 ```groovy
-    implementation 'net.pwall.text:string-mapper:1.0'
+    implementation 'net.pwall.text:string-mapper:1.1'
 ```
 ### Gradle (kts)
 ```kotlin
-    implementation("net.pwall.text:string-mapper:1.0")
+    implementation("net.pwall.text:string-mapper:1.1")
 ```
 
 Peter Wall
