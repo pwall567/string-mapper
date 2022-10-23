@@ -25,8 +25,9 @@
 
 package net.pwall.text
 
+import net.pwall.text.StringMapper.buildResult
 import net.pwall.text.StringMapper.mapCharacters
-import net.pwall.text.StringMapper.mapSubstring
+import net.pwall.text.StringMapper.mapSubstrings
 
 /**
  * String mapping functions to encode and decode UTF-8.
@@ -35,10 +36,13 @@ import net.pwall.text.StringMapper.mapSubstring
  */
 object UTF8StringMapper {
 
+    private const val illegalMessage = "Illegal UTF-8 sequence"
+    private const val incompleteMessage = "Incomplete UTF-8 sequence"
+
     /**
      * Encode string into UTF-8.
      */
-    fun String.toUTF8() = mapCharacters {
+    fun String.encodeUTF8(): String = mapCharacters {
         val code = it.code
         if (code <= 0x7F)
             null
@@ -50,7 +54,7 @@ object UTF8StringMapper {
         }
         else {
             StringBuilder(3).apply {
-                append((0xE0 or (code shr 12)).toChar())
+                append((0xE0 or (code ushr 12)).toChar())
                 append((0x80 or ((code shr 6) and 0x3F)).toChar())
                 append((0x80 or (code and 0x3F)).toChar())
             }
@@ -60,22 +64,22 @@ object UTF8StringMapper {
     /**
      * Decode string from UTF-8.
      */
-    fun String.fromUTF8() = mapSubstring {
+    fun String.decodeUTF8(): String = mapSubstrings {
         val first = this[it].code
         if (first <= 0x7F)
             null
         else if (first <= 0xDF) {
-            StringMapper.buildResult(this, it, 2, "UTF-8") {
+            buildResult(this, it, 2, incompleteMessage) {
                 val second = this[it + 1].code
-                require((second and 0xC0) == 0x80) { "Invalid UTF-8 sequence" }
+                require((second and 0xC0) == 0x80) { illegalMessage }
                 ((first and 0x1F) shl 6) or (second and 0x3F)
             }
         }
         else {
-            StringMapper.buildResult(this, it, 3, "UTF-8") {
+            buildResult(this, it, 3, incompleteMessage) {
                 val second = this[it + 1].code
                 val third = this[it + 2].code
-                require((second and 0xC0) == 0x80 && (third and 0xC0) == 0x80) { "Invalid UTF-8 sequence" }
+                require((second and 0xC0) == 0x80 && (third and 0xC0) == 0x80) { illegalMessage }
                 ((first and 0xF) shl 12) or ((second and 0x3F) shl 6) or (third and 0x3F)
             }
         }

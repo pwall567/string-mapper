@@ -31,8 +31,9 @@ import kotlin.test.assertSame
 import kotlin.test.expect
 
 import net.pwall.text.StringMapper.checkLength
+import net.pwall.text.StringMapper.fromHexDigit
 import net.pwall.text.StringMapper.mapCharacters
-import net.pwall.text.StringMapper.mapSubstring
+import net.pwall.text.StringMapper.mapSubstrings
 
 class StringMapperTest {
 
@@ -45,9 +46,9 @@ class StringMapperTest {
 
     @Test fun `should map substrings correctly`() {
         val unchanged = "unchanged"
-        assertSame(unchanged, unchanged.mapSubstring { null })
-        expect("caged") { unchanged.mapSubstring { if (unchanged[it] in "hnu") ElisionMapResult(1) else null } }
-        expect("unchecked") { unchanged.mapSubstring {
+        assertSame(unchanged, unchanged.mapSubstrings { null })
+        expect("caged") { unchanged.mapSubstrings { if (unchanged[it] in "hnu") ElisionMapResult(1) else null } }
+        expect("unchecked") { unchanged.mapSubstrings {
             if (unchanged.regionMatches(it, "ang", 0, 3))
                 StringMapResult(3, "eck")
             else
@@ -66,8 +67,32 @@ class StringMapperTest {
         assertFailsWith<IllegalArgumentException> { checkLength(data, 3, 2) }.let {
             expect("Incomplete escape sequence") { it.message }
         }
-        assertFailsWith<IllegalArgumentException> { checkLength(data, 3, 2, "encoded") }.let {
-            expect("Incomplete encoded sequence") { it.message }
+        assertFailsWith<IllegalArgumentException> { checkLength(data, 3, 2, "message") }.let {
+            expect("message") { it.message }
+        }
+    }
+
+    @Test fun `should convert hex digits`() {
+        expect(0) { '0'.fromHexDigit() }
+        expect(1) { '1'.fromHexDigit() }
+        expect(8) { '8'.fromHexDigit() }
+        expect(9) { '9'.fromHexDigit() }
+        expect(10) { 'A'.fromHexDigit() }
+        expect(11) { 'B'.fromHexDigit() }
+        expect(14) { 'E'.fromHexDigit() }
+        expect(15) { 'F'.fromHexDigit() }
+        expect(10) { 'a'.fromHexDigit() }
+        expect(11) { 'b'.fromHexDigit() }
+        expect(14) { 'e'.fromHexDigit() }
+        expect(15) { 'f'.fromHexDigit() }
+    }
+
+    @Test fun `should fail on invalid hex digit`() {
+        assertFailsWith<NumberFormatException> { 'G'.fromHexDigit() }.let {
+            expect("Illegal hexadecimal digit") { it.message }
+        }
+        assertFailsWith<java.lang.NumberFormatException> { '.'.fromHexDigit() }.let {
+            expect("Illegal hexadecimal digit") { it.message }
         }
     }
 

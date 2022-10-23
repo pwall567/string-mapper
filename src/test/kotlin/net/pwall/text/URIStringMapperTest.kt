@@ -26,7 +26,6 @@
 package net.pwall.text
 
 import kotlin.test.Test
-import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertSame
 import kotlin.test.assertTrue
@@ -34,7 +33,6 @@ import kotlin.test.expect
 
 import net.pwall.text.URIStringMapper.decodeURI
 import net.pwall.text.URIStringMapper.encodeURI
-import net.pwall.text.URIStringMapper.fromHexDigit
 import net.pwall.text.URIStringMapper.isUnreservedForURI
 
 class URIStringMapperTest {
@@ -44,6 +42,7 @@ class URIStringMapperTest {
         assertSame(unchanged, unchanged.encodeURI())
         expect("a%2Fb") { "a/b".encodeURI() }
         expect("%28%3F%29") { "(?)".encodeURI() }
+        expect("a%20b") { "a b".encodeURI() }
     }
 
     @Test fun `should decode URI string`() {
@@ -53,28 +52,9 @@ class URIStringMapperTest {
         expect("(?)") { "%28%3F%29".decodeURI() }
     }
 
-    @Test fun `should convert hex digits`() {
-        expect(0) { '0'.fromHexDigit() }
-        expect(1) { '1'.fromHexDigit() }
-        expect(8) { '8'.fromHexDigit() }
-        expect(9) { '9'.fromHexDigit() }
-        expect(10) { 'A'.fromHexDigit() }
-        expect(11) { 'B'.fromHexDigit() }
-        expect(14) { 'E'.fromHexDigit() }
-        expect(15) { 'F'.fromHexDigit() }
-        expect(10) { 'a'.fromHexDigit() }
-        expect(11) { 'b'.fromHexDigit() }
-        expect(14) { 'e'.fromHexDigit() }
-        expect(15) { 'f'.fromHexDigit() }
-    }
-
-    @Test fun `should fail on invalid hex digit`() {
-        assertFailsWith<IllegalArgumentException> { 'G'.fromHexDigit() }.let {
-            expect("Illegal URI escape sequence") { it.message }
-        }
-        assertFailsWith<IllegalArgumentException> { '.'.fromHexDigit() }.let {
-            expect("Illegal URI escape sequence") { it.message }
-        }
+    @Test fun `should decode URI string containing plus for space`() {
+        expect("a b") { "a+b".decodeURI() }
+        expect("a b c,d") { "a+b+c%2Cd".decodeURI() }
     }
 
     @Test fun `should determine whether character is unreserved for URI`() {

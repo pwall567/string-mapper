@@ -63,19 +63,19 @@ object StringMapper {
      * parameters, the original string and the current index, and returns a `MapResult` object which contains the
      * replacement details and the number of characters from the original string to be skipped.
      */
-    fun String.mapSubstring(mapFunction: (Int) -> MapResult?): String {
+    fun String.mapSubstrings(mapFunction: (Int) -> MapResult?): String {
         val len = length
         for (i in 0 until len) {
             mapFunction(i)?.let {
                 return buildString {
-                    append(this@mapSubstring, 0, i)
+                    append(this@mapSubstrings, 0, i)
                     it.appendResult(this)
                     var j = i + it.length
                     while (j < len) {
                         mapFunction(j)?.let {
                             it.appendResult(this)
                             j += it.length
-                        } ?: append(this@mapSubstring[j++])
+                        } ?: append(this@mapSubstrings[j++])
                     }
                 }
             }
@@ -83,13 +83,41 @@ object StringMapper {
         return this
     }
 
-    fun checkLength(s: String, i: Int, len: Int, name: String = "escape") {
-        require(i + len <= s.length) { "Incomplete $name sequence" }
+    /**
+     * Check that there are sufficient characters left in the input string to complete the sequence.
+     */
+    fun checkLength(
+        inputString: String,
+        index: Int,
+        length: Int,
+        errorMessage: String = "Incomplete escape sequence",
+    ) {
+        require(index + length <= inputString.length) { errorMessage }
     }
 
-    fun buildResult(s: String, i: Int, len: Int, name: String = "escape", block: () -> Int): MapResult {
-        checkLength(s, i, len, name)
-        return CharMapResult(len, block().toChar())
+    /**
+     * Build a dynamic character decoding result (uses length both to check the input and to return the length to be
+     * skipped).
+     */
+    fun buildResult(
+        inputString: String,
+        index: Int,
+        length: Int,
+        errorMessage: String = "Incomplete escape sequence",
+        block: () -> Int
+    ): MapResult {
+        checkLength(inputString, index, length, errorMessage)
+        return CharMapResult(length, block().toChar())
+    }
+
+    /**
+     * Convert a character from hexadecimal.
+     */
+    fun Char.fromHexDigit(): Int = when (this) {
+        in '0'..'9' -> this.code - '0'.code
+        in 'A'..'F' -> this.code - ('A'.code - 10)
+        in 'a'..'f' -> this.code - ('a'.code - 10)
+        else -> throw NumberFormatException("Illegal hexadecimal digit")
     }
 
 }

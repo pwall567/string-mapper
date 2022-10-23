@@ -30,22 +30,23 @@ package net.pwall.text
  *
  * @author  Peter Wall
  */
-abstract class MapResult(val length: Int) {
-    abstract fun appendResult(a: Appendable)
+interface MapResult {
+    val length: Int
+    fun appendResult(a: Appendable)
 }
 
-class StringMapResult(length: Int, private val result: String) : MapResult(length) {
+class StringMapResult(override val length: Int, private val result: String) : MapResult {
     override fun appendResult(a: Appendable) {
         a.append(result)
     }
 }
 
-class CharMapResult(length: Int, private val result: Char) : MapResult(length) {
+class CharMapResult(override val length: Int, private val result: Char) : MapResult {
     override fun appendResult(a: Appendable) {
         a.append(result)
     }
 }
 
-class ElisionMapResult(length: Int) : MapResult(length) {
+class ElisionMapResult(override val length: Int) : MapResult {
     override fun appendResult(a: Appendable) {}
 }
