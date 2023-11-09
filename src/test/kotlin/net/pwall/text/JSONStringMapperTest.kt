@@ -2,7 +2,7 @@
  * @(#) JSONStringMapperTest.kt
  *
  * string-mapper  String mapping utilities
- * Copyright (c) 2022 Peter Wall
+ * Copyright (c) 2022, 2023 Peter Wall
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -44,7 +44,7 @@ class JSONStringMapperTest {
         expect("backslash \\\\ quote \\\" bs \\b ff \\f lf \\n cr \\r ht \\t") {
             "backslash \\ quote \" bs \b ff \u000C lf \n cr \r ht \t".encodeJSON()
         }
-        expect("nul \\u0000 em dash \\u2014") { "nul \u0000 em dash \u2014".encodeJSON() }
+        expect("nul \\u0000 em dash \\u2014 up arr \\u21d1") { "nul \u0000 em dash \u2014 up arr \u21D1".encodeJSON() }
     }
 
     @Test fun `should return original string when nothing to be decoded`() {
@@ -56,7 +56,7 @@ class JSONStringMapperTest {
         expect("backslash \\ quote \" bs \b ff \u000C lf \n cr \r ht \t slash /") {
             "backslash \\\\ quote \\\" bs \\b ff \\f lf \\n cr \\r ht \\t slash \\/".decodeJSON()
         }
-        expect("nul \u0000 em dash \u2014") { "nul \\u0000 em dash \\u2014".decodeJSON() }
+        expect("nul \u0000 em dash \u2014 up arr \u21D1") { "nul \\u0000 em dash \\u2014 up arr \\u21D1".decodeJSON() }
     }
 
     @Test fun `should throw exception on illegal escape sequence`() {

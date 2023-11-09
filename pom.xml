@@ -5,15 +5,16 @@
 
   <groupId>net.pwall.text</groupId>
   <artifactId>string-mapper</artifactId>
-  <version>2.0</version>
+  <version>2.1</version>
   <name>String mapping utilities</name>
   <description>String mapping utilities for escaping and unescaping character sequences</description>
   <packaging>jar</packaging>
+  <url>https://github.com/pwall567/string-mapper</url>
 
   <parent>
     <groupId>net.pwall.maven</groupId>
     <artifactId>maven-kotlin</artifactId>
-    <version>4.0</version>
+    <version>6.0</version>
   </parent>
 
   <licenses>
@@ -55,17 +56,11 @@
     <dependency>
       <groupId>net.pwall.util</groupId>
       <artifactId>int-output</artifactId>
-      <version>1.3</version>
+      <version>2.0</version>
     </dependency>
     <dependency>
       <groupId>org.jetbrains.kotlin</groupId>
       <artifactId>kotlin-stdlib-jdk8</artifactId>
-    </dependency>
-    <dependency>
-      <!-- This is required because kotlin-test-junit 1.6.10 includes junit 4.12 -->
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.jetbrains.kotlin</groupId>

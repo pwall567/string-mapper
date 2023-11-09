@@ -2,7 +2,7 @@
  * @(#) JSONStringMapper.kt
  *
  * string-mapper  String mapping utilities
- * Copyright (c) 2022 Peter Wall
+ * Copyright (c) 2022, 2023 Peter Wall
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -59,14 +59,14 @@ object JSONStringMapper {
             '"' -> "\\\""
             in ' '..'~' -> null
             '\b' -> "\\b"
-            '\u000c' -> "\\f"
+            '\u000c' -> "\\f"// TODO drop this and allow it to encode as \u000C ?
             '\n' -> "\\n"
             '\r' -> "\\r"
             '\t' -> "\\t"
             else -> buildString {
                 append('\\')
                 append('u')
-                IntOutput.append4Hex(this, it.code)
+                IntOutput.append4HexLC(this, it.code)
             }
         }
     }

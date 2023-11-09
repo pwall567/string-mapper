@@ -2,6 +2,12 @@
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## [2.1] - 2023-11-10
+### Changed
+- `JSONStringMapper`: use lower case for hexadecimal \uxxxx constructs
+- `pom.xml`: upgraded Kotlin version to 1.8.22
+- `pom.xml`: updated dependency version
+
 ## [2.0] - 2022-10-23
 ### Added
 - `JSONStringMapper`: JSON string encoding and decoding
