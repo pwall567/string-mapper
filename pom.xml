@@ -5,7 +5,7 @@
 
   <groupId>net.pwall.text</groupId>
   <artifactId>string-mapper</artifactId>
-  <version>2.1</version>
+  <version>2.2</version>
   <name>String mapping utilities</name>
   <description>String mapping utilities for escaping and unescaping character sequences</description>
   <packaging>jar</packaging>
@@ -56,7 +56,7 @@
     <dependency>
       <groupId>net.pwall.util</groupId>
       <artifactId>int-output</artifactId>
-      <version>2.0</version>
+      <version>2.1</version>
     </dependency>
     <dependency>
       <groupId>org.jetbrains.kotlin</groupId>

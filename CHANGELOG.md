@@ -2,6 +2,10 @@
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## [2.2] - 2023-12-02
+### Changed
+- `pom.xml`: updated dependency version
+
 ## [2.1] - 2023-11-10
 ### Changed
 - `JSONStringMapper`: use lower case for hexadecimal \uxxxx constructs

@@ -159,25 +159,25 @@ which substitutes a string, and `ElisionMapResult` which substitutes nothing.
 
 ## Dependency Specification
 
-The latest version of the library is 2.1, and it may be obtained from the Maven Central repository.
+The latest version of the library is 2.2, and it may be obtained from the Maven Central repository.
 
 ### Maven
 ```xml
     <dependency>
       <groupId>net.pwall.text</groupId>
       <artifactId>string-mapper</artifactId>
-      <version>2.1</version>
+      <version>2.2</version>
     </dependency>
 ```
 ### Gradle
 ```groovy
-    implementation 'net.pwall.text:string-mapper:2.1'
+    implementation 'net.pwall.text:string-mapper:2.2'
 ```
 ### Gradle (kts)
 ```kotlin
-    implementation("net.pwall.text:string-mapper:2.1")
+    implementation("net.pwall.text:string-mapper:2.2")
 ```
 
 Peter Wall
 
-2023-11-10
+2023-12-02
