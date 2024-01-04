@@ -2,6 +2,10 @@
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## [Unreleased]
+### Changed
+- `README.md`: fixed initial description of escaped characters
+
 ## [2.2] - 2023-12-02
 ### Changed
 - `pom.xml`: updated dependency version

@@ -10,8 +10,8 @@ String mapping utilities
 ## Background
 
 There are many cases where a string must be converted to or from an encoded or "escaped" form.
-For example, in XML or HTML the characters "`&lt;`", "`&amp;`" and others must be encoded as multi-character strings
-("`&amp;lt;`", "`&amp;amp;`" _etc._) to avoid being interpreted as part of structural or layout sequences.
+For example, in XML or HTML the characters "&lt;", "&amp;" and others must be encoded as multi-character strings
+("&amp;lt;", "&amp;amp;" _etc._) to avoid being interpreted as part of structural or layout sequences.
 
 For long sequences of data, a streaming approach may be preferred, and the
 [`pipelines`](https://github.com/pwall567/pipelines) library exists to address this use case.
