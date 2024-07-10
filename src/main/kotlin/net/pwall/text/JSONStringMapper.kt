@@ -47,7 +47,9 @@ object JSONStringMapper {
     private val carriageReturn = CharMapResult(2, '\r')
     private val tab = CharMapResult(2, '\t')
 
+    @Suppress("ConstPropertyName")
     private const val illegalMessage = "Illegal JSON escape sequence"
+    @Suppress("ConstPropertyName")
     private const val incompleteMessage = "Incomplete JSON escape sequence"
 
     /**

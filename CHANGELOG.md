@@ -2,9 +2,14 @@
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
-## [Unreleased]
+## [2.3] - 2024-07-10
+### Added
+- `build.yml`, `deploy.yml`: converted project to GitHub Actions
 ### Changed
 - `README.md`: fixed initial description of escaped characters
+- `pom.xml`: upgraded Kotlin version to 1.9.24
+### Removed
+- `.travis.yml`
 
 ## [2.2] - 2023-12-02
 ### Changed

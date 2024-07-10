@@ -40,7 +40,9 @@ object URIStringMapper {
 
     private val spaceResult = CharMapResult(1, ' ')
 
+    @Suppress("ConstPropertyName")
     private const val illegalMessage = "Illegal URI escape sequence"
+    @Suppress("ConstPropertyName")
     private const val incompleteMessage = "Incomplete URI escape sequence"
 
     /**

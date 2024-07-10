@@ -36,7 +36,9 @@ import net.pwall.text.StringMapper.mapSubstrings
  */
 object UTF8StringMapper {
 
+    @Suppress("ConstPropertyName")
     private const val illegalMessage = "Illegal UTF-8 sequence"
+    @Suppress("ConstPropertyName")
     private const val incompleteMessage = "Incomplete UTF-8 sequence"
 
     /**
