@@ -10,8 +10,8 @@ String mapping utilities
 ## Background
 
 There are many cases where a string must be converted to or from an encoded or &ldquo;escaped&rdquo; form.
-For example, in XML or HTML the characters &ldquo;`&lt;`&rdquo;, &ldquo;`&amp;`&rdquo; and others must be encoded as
-multi-character strings (&ldquo;`&amp;lt;`&rdquo;, &ldquo;`&amp;amp;`&rdquo; _etc._) to avoid being interpreted as part
+For example, in XML or HTML the characters &ldquo;`<`&rdquo;, &ldquo;`&`&rdquo; and others must be encoded as
+multi-character strings (&ldquo;`&lt;`&rdquo;, &ldquo;`&amp;`&rdquo; _etc._) to avoid being interpreted as part
 of structural or layout sequences.
 
 For long sequences of data, a streaming approach may be preferred, and the
@@ -64,7 +64,7 @@ The parameter to the mapping function is the index into the string to be examine
 have access to the original string), and the return value is an object implementing the [`MapResult`](#mapresult)
 interface; this supplies both the replacement (usually, but not necessarily, a single character) and the number of input
 characters to be skipped.
-For example, when decoding an XML string, the result of matching the characters &ldquo;`&amp;lt;`&rdquo; would be a
+For example, when decoding an XML string, the result of matching the characters &ldquo;`&lt;`&rdquo; would be a
 `MapResult` with a length of 4, substituting the character &ldquo;`<`&rdquo;.
 
 As with `mapCharacters`, a return value of `null` indicates that no mapping is required at the given index, and if all
