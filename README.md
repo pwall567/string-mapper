@@ -9,9 +9,10 @@ String mapping utilities
 
 ## Background
 
-There are many cases where a string must be converted to or from an encoded or "escaped" form.
-For example, in XML or HTML the characters "&lt;", "&amp;" and others must be encoded as multi-character strings
-("&amp;lt;", "&amp;amp;" _etc._) to avoid being interpreted as part of structural or layout sequences.
+There are many cases where a string must be converted to or from an encoded or &ldquo;escaped&rdquo; form.
+For example, in XML or HTML the characters &ldquo;`&lt;`&rdquo;, &ldquo;`&amp;`&rdquo; and others must be encoded as
+multi-character strings (&ldquo;`&amp;lt;`&rdquo;, &ldquo;`&amp;amp;`&rdquo; _etc._) to avoid being interpreted as part
+of structural or layout sequences.
 
 For long sequences of data, a streaming approach may be preferred, and the
 [`pipelines`](https://github.com/pwall567/pipelines) library exists to address this use case.
@@ -63,8 +64,8 @@ The parameter to the mapping function is the index into the string to be examine
 have access to the original string), and the return value is an object implementing the [`MapResult`](#mapresult)
 interface; this supplies both the replacement (usually, but not necessarily, a single character) and the number of input
 characters to be skipped.
-For example, when decoding an XML string, the result of matching the characters "`&amp;lt;`" would be a `MapResult` with
-a length of 4, substituting the character "`<`".
+For example, when decoding an XML string, the result of matching the characters &ldquo;`&amp;lt;`&rdquo; would be a
+`MapResult` with a length of 4, substituting the character &ldquo;`<`&rdquo;.
 
 As with `mapCharacters`, a return value of `null` indicates that no mapping is required at the given index, and if all
 calls to the mapping function result in `null` the original string will be returned.
@@ -113,11 +114,12 @@ And to decode a string:
 
 `URIStringMapper` provides functions to encode URI components using the percent-encoding process defined in the
 [URI Syntax Standard](https://www.rfc-editor.org/rfc/rfc3986#section-2), and to decode strings encoded in this manner.
-The encoding function will percent-encode all characters other than those defined in the standard as "unreserved", along
-with the dollar sign "`$`" &ndash; this is passed through unencoded because of its use in fragment identifiers in such
-standards as OpenAPI and JSON Schema.
+The encoding function will percent-encode all characters other than those defined in the standard as
+&ldquo;unreserved&rdquo;, along with the dollar sign &ldquo;`$`&rdquo; &ndash; this is passed through unencoded because
+of its use in fragment identifiers in such standards as OpenAPI and JSON Schema.
 
-This implementation does **not** use the plus sign "`+`" to encode a space character, but it will decode such usages.
+This implementation does **not** use the plus sign &ldquo;`+`&rdquo; to encode a space character, but it will decode
+such usages.
 
 To encode a string:
 ```kotlin
