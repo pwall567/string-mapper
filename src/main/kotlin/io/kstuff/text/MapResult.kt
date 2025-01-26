@@ -23,7 +23,7 @@
  * SOFTWARE.
  */
 
-package net.pwall.text
+package io.kstuff.text
 
 /**
  * Result object for [StringMapper].  Provides the replacement text, and the number of input characters to be skipped.

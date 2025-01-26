@@ -23,7 +23,7 @@
  * SOFTWARE.
  */
 
-package net.pwall.text
+package io.kstuff.text
 
 /**
  * A set of mapping functions to assist with encoding and decoding strings to and from an "escaped" form.

@@ -23,47 +23,41 @@
  * SOFTWARE.
  */
 
-package net.pwall.text
+package io.kstuff.text
 
 import kotlin.test.Test
 import kotlin.test.assertFailsWith
 import kotlin.test.expect
+import io.kstuff.test.shouldBe
+import io.kstuff.test.shouldThrow
 
-import net.pwall.text.UTF8StringMapper.decodeUTF8
-import net.pwall.text.UTF8StringMapper.encodeUTF8
+import io.kstuff.text.UTF8StringMapper.decodeUTF8
+import io.kstuff.text.UTF8StringMapper.encodeUTF8
 
 class UTF8StringMapperTest {
 
     @Test fun `should map to UTF-8`() {
-        expect("") { "".encodeUTF8() }
-        expect("[ \u00C2\u00A9 \u00C3\u00B7 ]") { "[ \u00A9 \u00F7 ]".encodeUTF8() }
-        expect("[ \u00E2\u0080\u0094 ]") { "[ \u2014 ]".encodeUTF8() }
-        expect("[ \u00EF\u00BB\u00BF ]") { "[ \uFEFF ]".encodeUTF8() }
+        "".encodeUTF8() shouldBe ""
+        "[ \u00A9 \u00F7 ]".encodeUTF8() shouldBe "[ \u00C2\u00A9 \u00C3\u00B7 ]"
+        "[ \u2014 ]".encodeUTF8() shouldBe "[ \u00E2\u0080\u0094 ]"
+        "[ \uFEFF ]".encodeUTF8() shouldBe "[ \u00EF\u00BB\u00BF ]"
     }
 
     @Test fun `should map from UTF-8`() {
-        expect("") { "".decodeUTF8() }
-        expect("[ \u00A9 \u00F7 ]") { "[ \u00C2\u00A9 \u00C3\u00B7 ]".decodeUTF8() }
-        expect("[ \u2014 ]") { "[ \u00E2\u0080\u0094 ]".decodeUTF8() }
-        expect("[ \uFEFF ]") { "[ \u00EF\u00BB\u00BF ]".decodeUTF8() }
+        "".decodeUTF8() shouldBe ""
+        "[ \u00C2\u00A9 \u00C3\u00B7 ]".decodeUTF8() shouldBe "[ \u00A9 \u00F7 ]"
+        "[ \u00E2\u0080\u0094 ]".decodeUTF8() shouldBe "[ \u2014 ]"
+        "[ \u00EF\u00BB\u00BF ]".decodeUTF8() shouldBe "[ \uFEFF ]"
     }
 
     @Test fun `should fail on incomplete UTF-8 sequence`() {
-        assertFailsWith<IllegalArgumentException> { " \u00C2".decodeUTF8() }.let {
-            expect("Incomplete UTF-8 sequence") { it.message }
-        }
-        assertFailsWith<IllegalArgumentException> { " \u00E2\u0080".decodeUTF8() }.let {
-            expect("Incomplete UTF-8 sequence") { it.message }
-        }
+        shouldThrow<IllegalArgumentException>("Incomplete UTF-8 sequence") { " \u00C2".decodeUTF8() }
+        shouldThrow<IllegalArgumentException>("Incomplete UTF-8 sequence") { " \u00E2\u0080".decodeUTF8() }
     }
 
     @Test fun `should fail on illegal UTF-8 sequence`() {
-        assertFailsWith<IllegalArgumentException> { " \u00C2\u0000".decodeUTF8() }.let {
-            expect("Illegal UTF-8 sequence") { it.message }
-        }
-        assertFailsWith<IllegalArgumentException> { " \u00E2\u0080\u0030".decodeUTF8() }.let {
-            expect("Illegal UTF-8 sequence") { it.message }
-        }
+        shouldThrow<IllegalArgumentException>("Illegal UTF-8 sequence") { " \u00C2\u0000".decodeUTF8() }
+        shouldThrow<IllegalArgumentException>("Illegal UTF-8 sequence") { " \u00E2\u0080\u0030".decodeUTF8() }
     }
 
 }

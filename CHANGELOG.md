@@ -2,6 +2,11 @@
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## [3.0] - 2024-11-28
+### Changed
+- `pom.xml`: moved to `io.kstuff` (package amd Maven group)
+- `pom.xml`: updated Kotlin version to 2.0.21
+
 ## [2.3] - 2024-07-10
 ### Added
 - `build.yml`, `deploy.yml`: converted project to GitHub Actions

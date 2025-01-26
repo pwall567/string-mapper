@@ -23,11 +23,11 @@
  * SOFTWARE.
  */
 
-package net.pwall.text
+package io.kstuff.text
 
-import net.pwall.text.StringMapper.buildResult
-import net.pwall.text.StringMapper.mapCharacters
-import net.pwall.text.StringMapper.mapSubstrings
+import io.kstuff.text.StringMapper.buildResult
+import io.kstuff.text.StringMapper.mapCharacters
+import io.kstuff.text.StringMapper.mapSubstrings
 
 /**
  * String mapping functions to encode and decode UTF-8.

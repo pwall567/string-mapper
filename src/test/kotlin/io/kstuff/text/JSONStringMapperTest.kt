@@ -23,57 +23,57 @@
  * SOFTWARE.
  */
 
-package net.pwall.text
+package io.kstuff.text
 
 import kotlin.test.Test
-import kotlin.test.assertFailsWith
-import kotlin.test.assertSame
-import kotlin.test.expect
 
-import net.pwall.text.JSONStringMapper.decodeJSON
-import net.pwall.text.JSONStringMapper.encodeJSON
+import io.kstuff.test.shouldBe
+import io.kstuff.test.shouldBeSameInstance
+import io.kstuff.test.shouldThrow
+
+import io.kstuff.text.JSONStringMapper.decodeJSON
+import io.kstuff.text.JSONStringMapper.encodeJSON
 
 class JSONStringMapperTest {
 
     @Test fun `should return original string when nothing to be encoded`() {
         val unchanged = "unchanged"
-        assertSame(unchanged, unchanged.encodeJSON())
+        unchanged.encodeJSON() shouldBeSameInstance unchanged
     }
 
     @Test fun `should encode JSON characters as needed`() {
-        expect("backslash \\\\ quote \\\" bs \\b ff \\f lf \\n cr \\r ht \\t") {
-            "backslash \\ quote \" bs \b ff \u000C lf \n cr \r ht \t".encodeJSON()
-        }
-        expect("nul \\u0000 em dash \\u2014 up arr \\u21d1") { "nul \u0000 em dash \u2014 up arr \u21D1".encodeJSON() }
+        "backslash \\ quote \" bs \b ff \u000C lf \n cr \r ht \t".encodeJSON() shouldBe
+                "backslash \\\\ quote \\\" bs \\b ff \\f lf \\n cr \\r ht \\t"
+        "nul \u0000 em dash \u2014 up arr \u21D1".encodeJSON() shouldBe "nul \\u0000 em dash \\u2014 up arr \\u21d1"
     }
 
     @Test fun `should return original string when nothing to be decoded`() {
         val unchanged = "unchanged"
-        assertSame(unchanged, unchanged.decodeJSON())
+        unchanged.decodeJSON() shouldBeSameInstance unchanged
     }
 
     @Test fun `should decode JSON characters as needed`() {
-        expect("backslash \\ quote \" bs \b ff \u000C lf \n cr \r ht \t slash /") {
-            "backslash \\\\ quote \\\" bs \\b ff \\f lf \\n cr \\r ht \\t slash \\/".decodeJSON()
-        }
-        expect("nul \u0000 em dash \u2014 up arr \u21D1") { "nul \\u0000 em dash \\u2014 up arr \\u21D1".decodeJSON() }
+        "backslash \\\\ quote \\\" bs \\b ff \\f lf \\n cr \\r ht \\t slash \\/".decodeJSON() shouldBe
+                "backslash \\ quote \" bs \b ff \u000C lf \n cr \r ht \t slash /"
+        "nul \\u0000 em dash \\u2014 up arr \\u21D1".decodeJSON() shouldBe "nul \u0000 em dash \u2014 up arr \u21D1"
+
     }
 
     @Test fun `should throw exception on illegal escape sequence`() {
-        assertFailsWith<IllegalArgumentException> { "\\a".decodeJSON() }.let {
-            expect("Illegal JSON escape sequence") { it.message }
+        shouldThrow<IllegalArgumentException>("Illegal JSON escape sequence") {
+            "\\a".decodeJSON()
         }
     }
 
     @Test fun `should throw exception on illegal unicode escape sequence`() {
-        assertFailsWith<IllegalArgumentException> { "\\u123g".decodeJSON() }.let {
-            expect("Illegal JSON escape sequence") { it.message }
+        shouldThrow<IllegalArgumentException>("Illegal JSON escape sequence") {
+            "\\u123g".decodeJSON()
         }
     }
 
     @Test fun `should throw exception on incomplete escape sequence`() {
-        assertFailsWith<IllegalArgumentException> { "\\u123".decodeJSON() }.let {
-            expect("Incomplete JSON escape sequence") { it.message }
+        shouldThrow<IllegalArgumentException>("Incomplete JSON escape sequence") {
+            "\\u123".decodeJSON()
         }
     }
 
