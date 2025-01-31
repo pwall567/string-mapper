@@ -26,8 +26,7 @@
 package io.kstuff.text
 
 import kotlin.test.Test
-import kotlin.test.assertFailsWith
-import kotlin.test.expect
+
 import io.kstuff.test.shouldBe
 import io.kstuff.test.shouldThrow
 

@@ -161,25 +161,25 @@ which substitutes a string, and `ElisionMapResult` which substitutes nothing.
 
 ## Dependency Specification
 
-The latest version of the library is 3.0, and it may be obtained from the Maven Central repository.
+The latest version of the library is 3.1, and it may be obtained from the Maven Central repository.
 
 ### Maven
 ```xml
     <dependency>
       <groupId>io.kstuff</groupId>
       <artifactId>string-mapper</artifactId>
-      <version>3.0</version>
+      <version>3.1</version>
     </dependency>
 ```
 ### Gradle
 ```groovy
-    implementation 'io.kstuff:string-mapper:3.0'
+    implementation 'io.kstuff:string-mapper:3.1'
 ```
 ### Gradle (kts)
 ```kotlin
-    implementation("io.kstuff:string-mapper:3.0")
+    implementation("io.kstuff:string-mapper:3.1")
 ```
 
 Peter Wall
 
-2025-01-26
+2025-01-31

@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>string-mapper</artifactId>
-  <version>3.0</version>
+  <version>3.1</version>
   <name>String mapping utilities</name>
   <description>String mapping utilities for escaping and unescaping character sequences</description>
   <packaging>jar</packaging>
@@ -60,9 +60,9 @@
 
   <dependencies>
     <dependency>
-      <groupId>net.pwall.util</groupId>
+      <groupId>io.jstuff</groupId>
       <artifactId>int-output</artifactId>
-      <version>2.1</version>
+      <version>3.0</version>
     </dependency>
     <dependency>
       <groupId>org.jetbrains.kotlin</groupId>

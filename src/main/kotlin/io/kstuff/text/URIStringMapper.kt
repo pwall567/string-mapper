@@ -25,11 +25,12 @@
 
 package io.kstuff.text
 
+import io.jstuff.util.IntOutput.append2Hex
+
 import io.kstuff.text.StringMapper.buildResult
 import io.kstuff.text.StringMapper.fromHexDigit
 import io.kstuff.text.StringMapper.mapCharacters
 import io.kstuff.text.StringMapper.mapSubstrings
-import net.pwall.util.IntOutput.append2Hex
 
 /**
  * String mapping functions to perform URI percent-encoding and -decoding.

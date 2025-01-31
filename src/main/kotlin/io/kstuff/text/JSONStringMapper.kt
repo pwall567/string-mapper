@@ -25,11 +25,12 @@
 
 package io.kstuff.text
 
+import io.jstuff.util.IntOutput
+
 import io.kstuff.text.StringMapper.buildResult
 import io.kstuff.text.StringMapper.fromHexDigit
 import io.kstuff.text.StringMapper.mapCharacters
 import io.kstuff.text.StringMapper.mapSubstrings
-import net.pwall.util.IntOutput
 
 /**
  * String mapping functions to perform JSON string encoding and decoding.

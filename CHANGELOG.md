@@ -2,10 +2,15 @@
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## [3.1] - 2025-01-31
+### Changed
+- `pom.xml`: updated dependency version
+
 ## [3.0] - 2025-01-26
 ### Changed
 - `pom.xml`: moved to `io.kstuff` (package amd Maven group)
 - `pom.xml`: updated Kotlin version to 2.0.21
+- tests: converted to `should-test` library
 
 ## [2.3] - 2024-07-10
 ### Added
